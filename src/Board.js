@@ -5,7 +5,6 @@ import {placeMark, expandBoard, checkWin} from './actions'
 
 function Board() {
     const dispatch = useDispatch()
-    const player = useSelector(state => state.game.player)
     const rowLength = useSelector(state => state.game.rowLength)
     const columnLength = useSelector(state => state.game.columnLength)
     const board = useSelector(state => state.game.board)

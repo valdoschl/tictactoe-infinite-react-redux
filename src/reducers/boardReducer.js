@@ -27,8 +27,10 @@ const gameReducer = (state=initState, action) => {
             }
         case 'CHECK_WIN':
             if(winLogic(id,state)) {
-                alert(state.player+' won') 
-                state = initState
+                setTimeout(() => {
+                    alert(state.player+' won')
+                }, 1);
+                window.location.reload()
             } else {
                 state = {
                     ...state,
@@ -37,18 +39,13 @@ const gameReducer = (state=initState, action) => {
             }
             return state
         case 'EXPAND_BOARD':
-            if(state !== initState) {
-                const newState = expandBoard(id,state)
-                return {
-                    ...state,
-                    rowLength: newState.rowLength,
-                    columnLength: newState.columnLength,
-                    board: newState.board
-                }
-            } else {
-                return state
+            const newState = expandBoard(id,state)
+            return {
+                ...state,
+                rowLength: newState.rowLength,
+                columnLength: newState.columnLength,
+                board: newState.board
             }
-            
         default:
             return state
     }
