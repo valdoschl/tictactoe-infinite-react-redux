@@ -1,4 +1,5 @@
 import {winLogic} from '../modules/winLogic'
+import {expandBoard} from '../modules/expandBoard'
 
 const initBoard = []
 const boardSize = 5 //x^2
@@ -25,17 +26,29 @@ const gameReducer = (state=initState, action) => {
                 board
             }
         case 'CHECK_WIN':
-            winLogic(id,state) ? (
-                console.log('voitto')
-            ) : (
+            if(winLogic(id,state)) {
+                alert(state.player+' won') 
+                state = initState
+            } else {
                 state = {
                     ...state,
                     player: state.player === 'x' ? 'o' : 'x'
                 }
-            )
+            }
             return state
         case 'EXPAND_BOARD':
-            return state
+            if(state !== initState) {
+                const newState = expandBoard(id,state)
+                return {
+                    ...state,
+                    rowLength: newState.rowLength,
+                    columnLength: newState.columnLength,
+                    board: newState.board
+                }
+            } else {
+                return state
+            }
+            
         default:
             return state
     }

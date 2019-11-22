@@ -2,6 +2,7 @@ import React from 'react';
 import {useSelector, useDispatch} from 'react-redux'
 import {placeMark, expandBoard, checkWin} from './actions'
 
+
 function Board() {
     const dispatch = useDispatch()
     const player = useSelector(state => state.game.player)
@@ -22,6 +23,7 @@ function Board() {
         if (board[id].mark === '') {
             dispatch(placeMark(id))
             dispatch(checkWin(id))
+            dispatch(expandBoard(id))
         }
     }
 

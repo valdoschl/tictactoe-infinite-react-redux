@@ -5,9 +5,10 @@ export const placeMark = (id) => {
     }
 }
 
-export const expandBoard = () => {
+export const expandBoard = (id) => {
     return {
-        type: 'EXPAND_BOARD'
+        type: 'EXPAND_BOARD',
+        payload: id
     }
 }
 
